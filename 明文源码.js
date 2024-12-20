@@ -24,7 +24,42 @@ let go2Socks5s = [
 	'*cloudatacdn.com',
 	'*.loadshare.org',
 ];
-let addresses = [];
+let addresses = [
+	'cloudflare.cfgo.cc#优选官方线路',
+	'www.visa.com.sg#官方优选域名',
+	'www.wto.org:8080#官方优选域名',
+	'www.who.int:8880#官方优选域名',
+	'*.cloudflare.182682.xyz',
+	'104.17.20.76#SEA东南亚 移动 by kk',
+	'172.64.102.53#US美国 洛杉矶 by kk',
+	'104.21.114.122#US美国',
+	'104.19.141.21#US美国 电信 by kk',
+	'104.24.70.224#US 洛杉矶 联通 by kk',
+	'162.159.128.45#HK香港 2024',
+	'104.17.99.63#HK by kk',
+	'104.18.42.36#HK kk 低延迟',
+	'104.16.14.89#HK kk',
+	'172.64.161.121#HK',
+	'104.19.44.144#HK 改 kk',
+	'141.101.121.246#US美国 电信2 by kk',
+	'172.67.237.211#US美国 改3 by kk',
+	'104.17.129.17#HK香港1 by kk',
+	'104.18.49.100#US美国USA1',
+	'194.59.5.184#US美国usa2',
+	'104.18.53.34#US美国USA3',
+	'188.42.89.20#US美国usa4',
+	'5.182.84.28#US美国20241213',
+	'104.19.218.169#HK香港2',
+	'104.17.132.84#HK香港3',
+	'104.18.144.114#HK香港20241213',
+	'104.16.0.100#HK香港20241213-2',
+	'harlee.ns.cloudflare.com#IPV4通用高速1',
+	'fred.ns.cloudflare.com#IPV6通用高速2',
+	'visa.cn#通用高速3',
+	'SHOPIFY.COM#通用高速4',
+	'vape.gg#通用高速5',
+	'www.visaeurope.at#通用高速6',
+];
 let addressesapi = [];
 let addressesnotls = [];
 let addressesnotlsapi = [];
