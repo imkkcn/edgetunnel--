@@ -28,7 +28,7 @@ let addresses = [
 	'cloudflare.cfgo.cc#欢迎使用KK的节点',
 	'www.visa.com.sg#节点已于2025年1月23日进行更新',
 	'www.wto.org:8080#目前测速最快节点为_HK香港2_',
-	'www.who.int:8880#更新日志:优化并删除无用节点并增加节点',
+	'www.who.int:8880#更新日志_优化并删除无用节点并增加节点',
 	'*.cloudflare.182682.xyz',
 	'104.17.20.76#SEA东南亚 移动 by kk',
 	'104.19.141.21#US美国 电信 by kk',
