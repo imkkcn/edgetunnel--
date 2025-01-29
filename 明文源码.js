@@ -27,7 +27,7 @@ let go2Socks5s = [
 let addresses = [
 	'cloudflare.cfgo.cc#欢迎使用KK的节点',
 	'www.visa.com.sg#节点已于2025年1月30日进行更新',
-	'www.wto.org:8080#目前测速最快节点为_HK香港 2025-1-24-1_',
+	'www.wto.org:8080#目前测速最快节点为HK香港 2025-1-30-2',
 	'www.who.int:8880#更新日志_增加节点',
 
 	'*.cloudflare.182682.xyz',
