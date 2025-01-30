@@ -100,7 +100,9 @@ let addresses = [
 	'www.visaeurope.at#CDN加速6',
 
 ];
-let addressesapi = [];
+let addressesapi = [
+	'https://raw.githubusercontent.com/imkkcn/edgetunnel--/refs/heads/main/kk.txt'//KK优选
+];
 let addressesnotls = [];
 let addressesnotlsapi = [];
 let addressescsv = [];
