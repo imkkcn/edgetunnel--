@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改 kk.txt 文件</title>
+</head>
+<body>
+    <h1>修改 kk.txt 文件</h1>
+    <form id="editForm">
+        <textarea id="fileContent" rows="10" cols="50"></textarea><br>
+        <button type="submit">保存更改</button>
+    </form>
+
+    <script>
+        // 获取 kk.txt 文件的内容并显示在文本区域
+        fetch('kk.txt')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('fileContent').value = data;
+            })
+            .catch(error => {
+                console.error('读取 kk.txt 文件失败:', error);
+            });
+
+        // 处理表单提交事件
+        document.getElementById('editForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const newContent = document.getElementById('fileContent').value;
+
+            // 使用 GitHub API 更新 kk.txt 文件
+            fetch('https://api.github.com/repos/用户名/仓库名/contents/kk.txt', {
+                method: 'PUT',
+                headers: {
+                    'Authorization': 'Bearer 你的GitHub个人访问令牌',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: '更新 kk.txt 文件',
+                    content: btoa(newContent), // 将内容编码为 Base64
+                    sha: '文件的当前SHA值' // 如果是首次创建文件，SHA值可以为空
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.content) {
+                    alert('文件已成功更新！');
+                } else {
+                    alert('更新失败，请检查控制台获取更多信息。');
+                }
+            })
+            .catch(error => {
+                console.error('更新文件失败:', error);
+                alert('更新失败，请检查控制台获取更多信息。');
+            });
+        });
+    </script>
+</body>
+</html>
