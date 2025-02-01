@@ -80,6 +80,8 @@
 	'194.59.5.184#US美国usa2',
 	'188.42.89.20#US美国usa4',
 
+        'ts.hpc.tw#CDN加速0',
+
 	'harlee.ns.cloudflare.com#CDN加速1',
 	'fred.ns.cloudflare.com#IPV6_CDN加速2',
 	'visa.cn#CDN加速3',
