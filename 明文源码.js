@@ -23,7 +23,7 @@ let go2Socks5s = [
 	'*.loadshare.org',
 ];
 let addresses = [
-		'https://raw.githubusercontent.com/imkkcn/edgetunnel--/refs/heads/main/kk.txt'//KK优选
+		
 ];
 let addressesapi = [
 	'https://raw.githubusercontent.com/imkkcn/edgetunnel--/refs/heads/main/kk.txt'//KK优选
