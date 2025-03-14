@@ -1,5 +1,5 @@
 	'cloudflare.com#欢迎使用KK的节点',
-	'www.visa.com.sg#节点已于2025年3月7日进行更新',
+	'www.visa.com.sg#节点已于2025年3月14日进行更新',
 	'www.cloudflare.com#目前测速最快节点为K香港 speed⚡',
 	'www.wemod.com#更新日志_小更新节点',
         'www.nexusmods.com#服务器采用Cloudflare运行'
