@@ -25,7 +25,7 @@ let go2Socks5s = [
 ];
 let addresses = [];
 let addressesapi = [
-	
+	'https://raw.githubusercontent.com/imkkcn/edgetunnel--/refs/heads/main/kk.txt'
 ];
 let addressesnotls = [];
 let addressesnotlsapi = [];
@@ -115,8 +115,8 @@ export default {
                 RproxyIP = env.RPROXYIP || !proxyIP ? 'true' : 'false';
             }
 
-            const upgradeHeader = request.headers.get('Upgrade');
-            const url = new URL(request.url);
+            const upgradeHeader = 请求.headers.get('Upgrade');
+            const url = new 网站(请求.url);
             if (!upgradeHeader || upgradeHeader !== 'websocket') {
                 if (env.ADD) addresses = await 整理(env.ADD);
                 if (env.ADDAPI) addressesapi = await 整理(env.ADDAPI);
@@ -160,7 +160,7 @@ export default {
                 const 路径 = url.pathname.toLowerCase();
                 if (路径 == '/') {
                     if (env.URL302) return Response.redirect(env.URL302, 302);
-                    else if (env.URL) return await 代理URL(env.URL, url);
+                    else if (env.网站) return await 代理URL(env.网站, url);
                     else return new Response(await nginx(), {
                         status: 200,
                         headers: {
@@ -168,15 +168,15 @@ export default {
                         },
                     });
                 } else if (路径 == `/${fakeUserID}`) {
-                    const fakeConfig = await 生成配置信息(userID, request.headers.get('Host'), sub, 'CF-Workers-SUB', RproxyIP, url, fakeUserID, fakeHostName, env);
+                    const fakeConfig = await 生成配置信息(userID, 请求.headers.get('Host'), sub, 'CF-Workers-SUB', RproxyIP, url, fakeUserID, fakeHostName, env);
                     return new Response(`${fakeConfig}`, { status: 200 });
                 } else if (url.pathname == `/${动态UUID}/edit` || 路径 == `/${userID}/edit`) {
-                    return await KV(request, env);
+                    return await KV(请求, env);
                 } else if (url.pathname == `/${动态UUID}/bestip` || 路径 == `/${userID}/bestip`) {
-                    return await bestIP(request, env);
+                    return await bestIP(请求, env);
                 } else if (url.pathname == `/${动态UUID}` || 路径 == `/${userID}`) {
-                    await sendMessage(`#获取订阅 ${FileName}`, request.headers.get('CF-Connecting-IP'), `UA: ${UA}</tg-spoiler>\n域名: ${url.hostname}\n<tg-spoiler>入口: ${url.pathname + url.search}</tg-spoiler>`);
-                    const 维列斯Config = await 生成配置信息(userID, request.headers.get('Host'), sub, UA, RproxyIP, url, fakeUserID, fakeHostName, env);
+                    await sendMessage(`#获取订阅 ${FileName}`, 请求.headers.get('CF-Connecting-IP'), `UA: ${UA}</tg-spoiler>\n域名: ${url.hostname}\n<tg-spoiler>入口: ${url.pathname + url.search}</tg-spoiler>`);
+                    const 维列斯Config = await 生成配置信息(userID, 请求.headers.get('Host'), sub, UA, RproxyIP, url, fakeUserID, fakeHostName, env);
                     const now = Date.now();
                     //const timestamp = Math.floor(now / 1000);
                     const today = new Date(now);
@@ -208,14 +208,14 @@ export default {
                                 "Content-Disposition": `attachment; filename=${FileName}; filename*=utf-8''${encodeURIComponent(FileName)}`,
                                 //"Content-Type": "text/plain;charset=utf-8",
                                 "Profile-Update-Interval": "6",
-                                "Profile-web-page-url": request.url.includes('?') ? request.url.split('?')[0] : request.url,
+                                "Profile-web-page-url": 请求.url.includes('?') ? 请求.url.split('?')[0] : 请求.url,
                                 "Subscription-Userinfo": `upload=${pagesSum}; download=${workersSum}; total=${total}; expire=${expire}`,
                             }
                         });
                     }
                 } else {
                     if (env.URL302) return Response.redirect(env.URL302, 302);
-                    else if (env.URL) return await 代理URL(env.URL, url);
+                    else if (env.网站) return await 代理URL(env.网站, url);
                     else return new Response('不用怀疑！你UUID就是错的！！！', { status: 404 });
                 }
             } else {
@@ -261,7 +261,7 @@ export default {
                     enableSocks = false;
                 }
 
-                return await 维列斯OverWSHandler(request);
+                return await 维列斯OverWSHandler(请求);
             }
         } catch (err) {
             let e = err;
@@ -270,7 +270,7 @@ export default {
     },
 };
 
-async function 维列斯OverWSHandler(request) {
+async function 维列斯OverWSHandler(请求) {
 
     // @ts-ignore
     const webSocketPair = new WebSocketPair();
@@ -286,7 +286,7 @@ async function 维列斯OverWSHandler(request) {
         console.log(`[${address}:${portWithRandomLog}] ${info}`, event || '');
     };
     // 获取早期数据头部，可能包含了一些初始化数据
-    const earlyDataHeader = request.headers.get('sec-websocket-protocol') || '';
+    const earlyDataHeader = 请求.headers.get('sec-websocket-protocol') || '';
 
     // 创建一个可读的 WebSocket 流，用于接收客户端数据
     const readableWebSocketStream = makeReadableWebSocketStream(webSocket, earlyDataHeader, log);
@@ -2179,10 +2179,10 @@ async function 迁移地址列表(env, txt = 'ADD.txt') {
     return false;
 }
 
-async function KV(request, env, txt = 'ADD.txt') {
+async function KV(请求, env, txt = 'ADD.txt') {
     try {
         // POST请求处理
-        if (request.method === "POST") {
+        if (请求.method === "POST") {
             if (!env.KV) return new Response("未绑定KV空间", { status: 400 });
             try {
                 const content = await request.text();
@@ -2968,15 +2968,15 @@ async function bestIP(request, env, txt = 'ADD.txt') {
     }
 
     // POST请求处理
-    if (request.method === "POST") {
+    if (请求.method === "POST") {
         if (!env.KV) return new Response("未绑定KV空间", { status: 400 });
 
         try {
-            const contentType = request.headers.get('Content-Type');
+            const contentType = 请求.headers.get('Content-Type');
 
             // 处理JSON格式的保存/追加请求
             if (contentType && contentType.includes('application/json')) {
-                const data = await request.json();
+                const data = await 请求.json();
                 const action = url.searchParams.get('action') || 'save';
 
                 if (!data.ips || !Array.isArray(data.ips)) {
@@ -3053,7 +3053,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
                 }
             } else {
                 // 处理普通文本格式的保存请求（兼容原有功能）
-                const content = await request.text();
+                const content = await 请求.text();
                 await env.KV.put(txt, content);
                 return new Response("保存成功");
             }
@@ -4570,4 +4570,5 @@ async function nginx() {
 	`
     return text;
 }
+
 
