@@ -1,8 +1,8 @@
 
 import { connect } from 'cloudflare:sockets';
 
-let userID = '';
-let proxyIP = '';
+let userID = '25acda9c-41c2-4436-97a6-08769386abeb';
+let proxyIP = 'ProxyIP.JP.CMLiussss.net';
 let DNS64Server = '';
 //let sub = '';
 let subConverter = atob('U1VCQVBJLkNNTGl1c3Nzcy5uZXQ=');
@@ -24,7 +24,9 @@ let go2Socks5s = [
     '*.loadshare.org',
 ];
 let addresses = [];
-let addressesapi = [];
+let addressesapi = [
+	
+];
 let addressesnotls = [];
 let addressesnotlsapi = [];
 let addressescsv = [];
@@ -50,9 +52,9 @@ let banHosts = [atob('c3BlZWQuY2xvdWRmbGFyZS5jb20=')];
 let SCV = 'true';
 let allowInsecure = '&allowInsecure=1';
 export default {
-    async fetch(request, env, ctx) {
+    async fetch(请求, env, ctx) {
         try {
-            const UA = request.headers.get('User-Agent') || 'null';
+            const UA = 请求.headers.get('User-Agent') || 'null';
             const userAgent = UA.toLowerCase();
             userID = env.UUID || env.uuid || env.PASSWORD || env.pswd || userID;
             if (env.KEY || env.TOKEN || (userID && !isValidUUID(userID))) {
@@ -4568,3 +4570,4 @@ async function nginx() {
 	`
     return text;
 }
+
