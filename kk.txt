@@ -1,2 +1,2 @@
 //KK config IP
-"cloudflare.com#Welcome to KK Airport";
+cloudflare.com#Welcome to KK Airport
