@@ -116,7 +116,7 @@ export default {
             }
 
             const upgradeHeader = 请求.headers.get('Upgrade');
-            const url = new 网站(请求.url);
+            const url = new URL(请求.url);
             if (!upgradeHeader || upgradeHeader !== 'websocket') {
                 if (env.ADD) addresses = await 整理(env.ADD);
                 if (env.ADDAPI) addressesapi = await 整理(env.ADDAPI);
@@ -160,7 +160,7 @@ export default {
                 const 路径 = url.pathname.toLowerCase();
                 if (路径 == '/') {
                     if (env.URL302) return Response.redirect(env.URL302, 302);
-                    else if (env.网站) return await 代理URL(env.网站, url);
+                    else if (env.URL) return await 代理URL(env.URL, url);
                     else return new Response(await nginx(), {
                         status: 200,
                         headers: {
@@ -215,7 +215,7 @@ export default {
                     }
                 } else {
                     if (env.URL302) return Response.redirect(env.URL302, 302);
-                    else if (env.网站) return await 代理URL(env.网站, url);
+                    else if (env.URL) return await 代理URL(env.URL, url);
                     else return new Response('不用怀疑！你UUID就是错的！！！', { status: 404 });
                 }
             } else {
@@ -4570,5 +4570,6 @@ async function nginx() {
 	`
     return text;
 }
+
 
 
