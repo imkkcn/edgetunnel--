@@ -2,3 +2,4 @@
 cloudflare.com:443#Welcome to KK Airport
 104.19.36.6:443#HK高宽带1
 104.19.53.138:443#HK高宽带2
+vape.gg:443#CDN加速1
