@@ -11,6 +11,7 @@ cloudflare.com:443#Welcome to KK Airport
 198.41.215.208#JP日本联通_2m/s
 104.16.5.221#US海外移动_30m/s
 104.17.139.17#US海外移动_0.2m/s
+198.41.214.251#US海外_20m/s
 
 
 ct.877774.xyz#CDN加速_电信网
