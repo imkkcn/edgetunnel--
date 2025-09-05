@@ -22,8 +22,8 @@ let go2Socks5s = [
     '*cloudatacdn.com',
     '*.loadshare.org',
 ];
-let addresses = 'https://raw.githubusercontent.com/imkkcn/edgetunnel--/refs/heads/main/kk.txt';
-let addressesapi = [];
+let addresses = [];
+let addressesapi = ['https://raw.githubusercontent.com/imkkcn/edgetunnel--/refs/heads/main/kk.txt'];
 let addressesnotls = [];
 let addressesnotlsapi = [];
 let addressescsv = [];
@@ -3957,5 +3957,6 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         },
     });
 }
+
 
 
