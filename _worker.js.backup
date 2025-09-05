@@ -4,7 +4,7 @@ import { connect } from 'cloudflare:sockets';
 let userID = '25acda9c-41c2-4436-97a6-08769386abeb';
 let proxyIP = 'ProxyIP.SG.CMLiussss.net';
 //ProxyIP.JP.CMLiussss.net
-let DNS64Server = '';
+//let DNS64Server = '';
 //let sub = '';
 let subConverter = atob('U1VCQVBJLkNNTGl1c3Nzcy5uZXQ=');
 let subConfig = atob('aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FDTDRTU1IvQUNMNFNTUi9tYXN0ZXIvQ2xhc2gvY29uZmlnL0FDTDRTU1JfT25saW5lX01pbmlfTXVsdGlNb2RlLmluaQ==');
@@ -92,7 +92,7 @@ export default {
             proxyIP = env.PROXYIP || env.proxyip || proxyIP;
             proxyIPs = await 整理(proxyIP);
             proxyIP = proxyIPs[Math.floor(Math.random() * proxyIPs.length)];
-            DNS64Server = env.DNS64 || env.NAT64 || DNS64Server;
+
             socks5Address = env.HTTP || env.SOCKS5 || socks5Address;
             socks5s = await 整理(socks5Address);
             socks5Address = socks5s[Math.floor(Math.random() * socks5s.length)];
@@ -410,19 +410,7 @@ async function handleTCPOutBound(remoteSocket, addressType, addressRemote, portR
         return tcpSocket;
     }
 
-    async function nat64() {
-        if (!useSocks) {
-            const nat64Proxyip = `[${await resolveToIPv6(addressRemote)}]`;
-            log(`NAT64 代理连接到 ${nat64Proxyip}:443`);
-            tcpSocket = await connectAndWrite(nat64Proxyip, 443);
-        }
-        tcpSocket.closed.catch(error => {
-            console.log('retry tcpSocket closed error', error);
-        }).finally(() => {
-            safeCloseWebSocket(webSocket);
-        })
-        remoteSocketToWS(tcpSocket, webSocket, 维列斯ResponseHeader, null, log);
-    }
+   
 
     /**
      * 重试函数：当 Cloudflare 的 TCP Socket 没有传入数据时，我们尝试重定向 IP
@@ -454,9 +442,7 @@ async function handleTCPOutBound(remoteSocket, addressType, addressRemote, portR
         })
         */
         // 建立从远程 Socket 到 WebSocket 的数据流
-        remoteSocketToWS(tcpSocket, webSocket, 维列斯ResponseHeader, nat64, log);
-    }
-
+        
     let useSocks = false;
     if (go2Socks5s.length > 0 && enableSocks) useSocks = await useSocks5Pattern(addressRemote);
     // 首次尝试连接远程服务器
@@ -2463,27 +2449,27 @@ async function KV(请求, env, txt = 'ADD.txt') {
 }
 
 async function resolveToIPv6(target) {
-    const defaultAddress = atob('cHJveHlpcC5jbWxpdXNzc3MubmV0');
-    if (!DNS64Server) {
-        try {
-            const response = await fetch(atob('aHR0cHM6Ly8xLjEuMS4xL2Rucy1xdWVyeT9uYW1lPW5hdDY0LmNtbGl1c3Nzcy5uZXQmdHlwZT1UWFQ='), {
-                headers: { 'Accept': 'application/dns-json' }
-            });
-
-            if (!response.ok) return defaultAddress;
-            const data = await response.json();
-            const txtRecords = (data.Answer || []).filter(record => record.type === 16).map(record => record.data);
-
-            if (txtRecords.length === 0) return defaultAddress;
-            let txtData = txtRecords[0];
-            if (txtData.startsWith('"') && txtData.endsWith('"')) txtData = txtData.slice(1, -1);
-            const prefixes = txtData.replace(/\\010/g, '\n').split('\n').filter(prefix => prefix.trim());
-            if (prefixes.length === 0) return defaultAddress;
-            DNS64Server = prefixes[Math.floor(Math.random() * prefixes.length)];
-        } catch (error) {
-            console.error('DNS64Server查询失败:', error);
-            return defaultAddress;
-        }
+//    const defaultAddress = atob('cHJveHlpcC5jbWxpdXNzc3MubmV0');
+//    if (!DNS64Server) {
+//        try {
+//            const response = await fetch(atob('aHR0cHM6Ly8xLjEuMS4xL2Rucy1xdWVyeT9uYW1lPW5hdDY0LmNtbGl1c3Nzcy5uZXQmdHlwZT1UWFQ='), {
+//                headers: { 'Accept': 'application/dns-json' }
+ //           });
+//
+ //           if (!response.ok) return defaultAddress;
+//            const data = await response.json();
+//            const txtRecords = (data.Answer || []).filter(record => record.type === 16).map(record => record.data);
+//
+//            if (txtRecords.length === 0) return defaultAddress;
+ //           let txtData = txtRecords[0];
+//            if (txtData.startsWith('"') && txtData.endsWith('"')) txtData = txtData.slice(1, -1);
+//            const prefixes = txtData.replace(/\\010/g, '\n').split('\n').filter(prefix => prefix.trim());
+//            if (prefixes.length === 0) return defaultAddress;
+//            DNS64Server = prefixes[Math.floor(Math.random() * prefixes.length)];
+ //       } catch (error) {
+ //           console.error('DNS64Server查询失败:', error);
+ //           return defaultAddress;
+//        }
     }
 
     // 检查是否为IPv4
@@ -2518,35 +2504,8 @@ async function resolveToIPv6(target) {
         return ipv4s[Math.floor(Math.random() * ipv4s.length)];
     }
 
-    // 查询NAT64 IPv6地址
-    async function queryNAT64(domain) {
-        const socket = connect({
-            hostname: isIPv6(DNS64Server) ? `[${DNS64Server}]` : DNS64Server,
-            port: 53
-        });
 
-        const writer = socket.writable.getWriter();
-        const reader = socket.readable.getReader();
-
-        try {
-            // 发送DNS查询
-            const query = buildDNSQuery(domain);
-            const queryWithLength = new Uint8Array(query.length + 2);
-            queryWithLength[0] = query.length >> 8;
-            queryWithLength[1] = query.length & 0xFF;
-            queryWithLength.set(query, 2);
-            await writer.write(queryWithLength);
-
-            // 读取响应
-            const response = await readDNSResponse(reader);
-            const ipv6s = parseIPv6(response);
-
-            return ipv6s.length > 0 ? ipv6s[0] : '未找到IPv6地址';
-        } finally {
-            await writer.close();
-            await reader.cancel();
-        }
-    }
+    
 
     // 构建DNS查询包
     function buildDNSQuery(domain) {
@@ -2651,11 +2610,7 @@ async function resolveToIPv6(target) {
         return answers;
     }
 
-    function convertToNAT64IPv6(ipv4Address) {
-        const parts = ipv4Address.split('.');
-        if (parts.length !== 4) {
-            throw new Error('无效的IPv4地址');
-        }
+
 
         // 将每个部分转换为16进制
         const hex = parts.map(part => {
@@ -2666,21 +2621,9 @@ async function resolveToIPv6(target) {
             return num.toString(16).padStart(2, '0');
         });
 
-        // 构造NAT64
-        return DNS64Server.split('/96')[0] + hex[0] + hex[1] + ":" + hex[2] + hex[3];
-    }
+       
 
-    try {
-        // 判断输入类型并处理
-        if (isIPv6(target)) return target; // IPv6直接返回
-        const ipv4 = isIPv4(target) ? target : await fetchIPv4(target);
-        const nat64 = DNS64Server.endsWith('/96') ? convertToNAT64IPv6(ipv4) : await queryNAT64(ipv4 + atob('LmlwLjA5MDIyNy54eXo='));
-        return isIPv6(nat64) ? nat64 : defaultAddress;
-    } catch (error) {
-        console.error('解析错误:', error);
-        return defaultAddress;
-    }
-}
+   
 
 async function bestIP(request, env, txt = 'ADD.txt') {
     const country = request.cf?.country || 'CN';
@@ -4571,6 +4514,7 @@ async function nginx() {
 	`
     return text;
 }
+
 
 
 
