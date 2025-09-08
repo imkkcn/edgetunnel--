@@ -1,6 +1,6 @@
 //KK config IP
 // :443#HK高宽带
-dash.cloudflare.com:443#Welcome to KK Airport
+cloudflare.com:443#Welcome to KK Airport
 
 8.219.59.132:48130#SG高速1
 111.119.200.18:48914#SG高速2
