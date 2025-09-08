@@ -2,7 +2,7 @@
 import { connect } from 'cloudflare:sockets';
 
 let userID = '';
-let proxyIP = '';
+let proxyIP = 'ProxyIP.SG.CMLiussss.net';
 let DNS64Server = '';
 //let sub = '';
 let subConverter = atob('U1VCQVBJLkNNTGl1c3Nzcy5uZXQ=');
@@ -24,7 +24,7 @@ let go2Socks5s = [
     '*.loadshare.org',
 ];
 let addresses = [];
-let addressesapi = [];
+let addressesapi = ['https://raw.githubusercontent.com/imkkcn/edgetunnel--/refs/heads/main/kk.txt'];
 let addressesnotls = [];
 let addressesnotlsapi = [];
 let addressescsv = [];
@@ -7188,3 +7188,4 @@ function config_Html(token = "test", proxyhost = "") {
 
     return html;
 }
+
