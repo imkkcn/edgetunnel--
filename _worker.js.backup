@@ -2,7 +2,9 @@
 import { connect } from 'cloudflare:sockets';
 
 let userID = 'c81c4c2d-e0d8-47ac-970f-79d67ed346f1';
-let proxyIP = 'ProxyIP.SG.CMLiussss.net';
+let proxyIP = 'ProxyIP.SG.CMLiussss.net'
+              '119.28.176.85:8082';
+              
 let DNS64Server = '';
 //let sub = '';
 let subConverter = atob('U1VCQVBJLkNNTGl1c3Nzcy5uZXQ=');
@@ -7188,5 +7190,6 @@ function config_Html(token = "test", proxyhost = "") {
 
     return html;
 }
+
 
 
